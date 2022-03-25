@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send("This is the server");
+  res.send("THIS IS THE CAFE COT DUA SMART HOME SERVER");
 });
 app.use("/account", accountRoute);
 app.use("/userinfo", userInfoRoute);
