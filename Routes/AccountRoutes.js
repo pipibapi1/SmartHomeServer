@@ -1,9 +1,16 @@
-import express from "express";
+const express = require("express");
+const Account = require("../Models/AccountModel.js");
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send("GET ACCOUNT INFORMATION");
+  Account.find(function (err, accounts) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(accounts);
+    }
+  });
 });
 
-export default router;
+module.exports = router;
