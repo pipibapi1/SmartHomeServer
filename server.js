@@ -11,7 +11,7 @@ const connectUrl = `mqtt://${host}:${ada_port}`;
 var client = mqtt.connect(connectUrl, {
   clientId,
   clean: true,
-  connectTimeout: 4000,
+  connectTimeout: 10000,
   username: "duy1711ak",
   password: "aio_wDly45vUxKNM9TzmAd2PACgBN51L",
   reconnectPeriod: 6000,
