@@ -3,7 +3,6 @@ const mqtt = require("mqtt");
 const host = "io.adafruit.com";
 const ada_port = "1883";
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
-
 const TestAda = require("./Models/TestModel.js");
 
 const connectUrl = `mqtt://${host}:${ada_port}`;
@@ -13,7 +12,7 @@ var client = mqtt.connect(connectUrl, {
   clean: true,
   connectTimeout: 10000,
   username: "duy1711ak",
-  password: "aio_wDly45vUxKNM9TzmAd2PACgBN51L",
+  password: "aio_YKVB56vb6isdNeo4hzygVoRlJjNg",
   reconnectPeriod: 6000,
 });
 
@@ -23,6 +22,9 @@ client.on("connect", () => {
   client.subscribe([topic], () => {
     console.log(`Subscribe to topic '${topic}'`);
   });
+});
+client.on("error", function (error) {
+  console.log("Can't connect" + error);
 });
 client.on("message", (topic, payload) => {
   console.log("Received Message:", topic, payload.toString());
