@@ -14,7 +14,7 @@ var client = mqtt.connect(connectUrl, {
   connectTimeout: 4000,
   username: "duy1711ak",
   password: "aio_wDly45vUxKNM9TzmAd2PACgBN51L",
-  reconnectPeriod: 1000,
+  reconnectPeriod: 6000,
 });
 
 const topic = "duy1711ak/feeds/iot-temp";
