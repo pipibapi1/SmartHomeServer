@@ -12,7 +12,7 @@ var client = mqtt.connect(connectUrl, {
   clean: true,
   connectTimeout: 10000,
   username: "duy1711ak",
-  password: "aio_Vsme54H4d8NPh0QBSXTGDGjhvw4Y",
+  password: "aio_LomH41XI3MfBu7zzxA6uVEHwKtCY",
   reconnectPeriod: 6000,
 });
 
