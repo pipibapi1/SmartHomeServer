@@ -68,6 +68,7 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("THIS IS THE CAFE COT DUA SMART HOME SERVER");
 });
+
 app.use("/account", accountRoute);
 app.use("/userinfo", userInfoRoute);
 app.use("/temphumid", tempHumidRoute);
