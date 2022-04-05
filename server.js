@@ -4,6 +4,7 @@ const host = "io.adafruit.com";
 const ada_port = "1883";
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
 const TestAda = require("./Models/TestModel.js");
+const TempModel = require("./Models/TemperatureModel.js")
 
 const connectUrl = `mqtt://${host}:${ada_port}`;
 
@@ -12,26 +13,41 @@ var client = mqtt.connect(connectUrl, {
   clean: true,
   connectTimeout: 10000,
   username: "duy1711ak",
-  password: "aio_mLiJ80UX61ecGLCeUwzTi3vtWCpE",
+  password: "aio_wSsJ61gqapOCi1uvfve5DTHJtc3N",
   reconnectPeriod: 6000,
 });
 
-const topic = "duy1711ak/feeds/iot-temp";
+const arrTopic = ["iot-alarm", "iot-door", "iot-gas", "iot-humi", "iot-light", "iot-lightsys", "iot-secu", "iot-switchlight", "iot-temp"]
+const feed = "duy1711ak/feeds/";
+
 client.on("connect", () => {
-  console.log("Temperature-Feeds Connected");
-  client.subscribe([topic], () => {
-    console.log(`Subscribe to topic '${topic}'`);
-  });
+  console.log("Feeds Connected");
+  for (let i = 0; i < arrTopic.length ; i++){
+    let topic = feed + arrTopic[i];
+    client.subscribe([topic], () => {
+      console.log('Subscribe to topic ' + topic);
+    });
+  }
+  
 });
 client.on("error", function (error) {
   console.log("Can't connect" + error);
 });
 client.on("message", (topic, payload) => {
   console.log("Received Message:", topic, payload.toString());
-  const newTestAda = new TestAda({
-    TemperatureTest: payload,
-  });
-  newTestAda.save();
+  let time = new Date();
+  if (topic == feed+ 'iot-temp'){
+    result = TempModel.update("UID001", time, payload)
+    if (result == 0){
+      TempModel.create("UID001", time, payload)
+    }
+  }
+  else {
+    const newTestAda = new TestAda({
+      TemperatureTest: payload,
+    });
+    newTestAda.save();
+  }
 });
 
 // Create REST API
