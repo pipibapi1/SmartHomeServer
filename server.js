@@ -79,6 +79,7 @@ mongoose
 const accountRoute = require("./Routes/AccountRoutes.js");
 const userInfoRoute = require("./Routes/UserInfoRoutes.js");
 const tempHumidRoute = require("./Routes/TempHumidRoutes.js");
+const notificationRoute = require("./Routes/NotificationRoutes.js");
 
 app.use(bodyParser.json());
 
@@ -89,6 +90,7 @@ app.get("/", (req, res) => {
 app.use("/account", accountRoute);
 app.use("/userinfo", userInfoRoute);
 app.use("/temphumid", tempHumidRoute);
+app.use("/notification", notificationRoute);
 
 app.listen(port, () =>
   console.log(`Server is Running on port: http://localhost:${port}`)
