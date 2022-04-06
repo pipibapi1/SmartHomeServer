@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.send(accounts);
+      res.json(accounts);
     }
   });
 });
