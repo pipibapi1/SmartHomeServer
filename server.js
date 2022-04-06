@@ -2,7 +2,7 @@
 const mqtt = require("mqtt");
 const host = "io.adafruit.com";
 const ada_port = "1883";
-const clientId = "mqtt_06092001";
+const clientId = "mqtt_06092001_backend";
 const TempModel = require("./Models/TemperatureModel.js");
 const Notification = require("./Models/NotificationModel.js");
 
