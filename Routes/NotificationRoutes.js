@@ -13,7 +13,7 @@ router.get("/get-all", async (req, res) => {
   });
 });
 
-router.get("/post-notification", async (req, res) => {
+router.post("/post-notification", async (req, res) => {
   const { type, content, date } = req.body;
   const newNotification = new Notification({
     type: type,
