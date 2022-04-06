@@ -13,15 +13,4 @@ router.get("/get-all", async (req, res) => {
   });
 });
 
-router.post("/post-notification", async (req, res) => {
-  const { type, content, date } = req.body;
-  const newNotification = new Notification({
-    type: type,
-    content: content,
-    date: date,
-  });
-  newNotification.save();
-  req.json(newNotification);
-});
-
 module.exports = router;

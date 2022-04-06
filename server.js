@@ -4,6 +4,7 @@ const host = "io.adafruit.com";
 const ada_port = "1883";
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
 const TempModel = require("./Models/TemperatureModel.js");
+const Notification = require("./Models/NotificationModel.js");
 
 const connectUrl = `mqtt://${host}:${ada_port}`;
 
@@ -50,6 +51,29 @@ client.on("message", (topic, payload) => {
       TempModel.create("UID001", time, payload);
     }
   }
+
+  if (topic == feed + "iot-gas") {
+    const type = "Gas Warning";
+    const content = "There may be gas leak in your house !";
+    const date = new Date();
+    const newNotification = new Notification({
+      type: type,
+      content: content,
+      date: date,
+    });
+    newNotification.save();
+  }
+  if (topic == feed + "iot-door") {
+    const type = "Door Alert";
+    const content = "Someone's just opened door 1 !!!";
+    const date = new Date();
+    const newNotification = new Notification({
+      type: type,
+      content: content,
+      date: date,
+    });
+    newNotification.save();
+  }
 });
 
 // Create REST API
@@ -90,23 +114,15 @@ app.get("/", (req, res) => {
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "*");
-  req.setHeader("Access-Control-Allow-Origin", "*");
+
   // Request methods you wish to allow
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
   );
-  req.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
+
   // Request headers you wish to allow
   res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
-
-  req.setHeader(
     "Access-Control-Allow-Headers",
     "X-Requested-With,content-type"
   );
@@ -114,7 +130,7 @@ app.use(function (req, res, next) {
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
   res.setHeader("Access-Control-Allow-Credentials", true);
-  req.setHeader("Access-Control-Allow-Credentials", true);
+
   // Pass to next layer of middleware
   next();
 });
