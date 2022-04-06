@@ -21,6 +21,7 @@ router.get("/post-notification", async (req, res) => {
     date: date,
   });
   newNotification.save();
+  req.json(newNotification);
 });
 
 module.exports = router;
