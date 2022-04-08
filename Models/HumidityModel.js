@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-let Temperature = new Schema({
+let Humidity = new Schema({
   userId : String,
   createAt : { type: Date, default: Date.now },
   data : [
@@ -12,12 +12,12 @@ let Temperature = new Schema({
   ]
 });
 
-tempModel = mongoose.model("Temperature", Temperature, "Temperature");
+humiModel = mongoose.model("Humidity", Humidity, "Humidity");
 
 module.exports = {
     create : function(uid, time, value){
         let day = new Date(time.getFullYear(), time.getMonth(), time.getDate());
-        tempModel.create({
+        humiModel.create({
             userId : uid,
             createAt : day,
             data : [
@@ -45,13 +45,13 @@ module.exports = {
                             time: time
                         }}
         }
-        tempModel.updateOne(myQuery, newUpdate, function (err, docs){
+        humiModel.updateOne(myQuery, newUpdate, function (err, docs){
             if (err) {
                 console.log(err);
             }
             else {
                 if (docs.matchedCount == 0) {
-                    tempModel.create({
+                    humiModel.create({
                         userId : uid,
                         createAt : day,
                         data : [

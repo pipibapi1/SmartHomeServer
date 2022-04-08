@@ -4,6 +4,7 @@ const host = "io.adafruit.com";
 const ada_port = "1883";
 const clientId = "mqtt_06092001_backend";
 const TempModel = require("./Models/TemperatureModel.js");
+const HumiModel = require("./Models/HumidityModel.js");
 const Notification = require("./Models/NotificationModel.js");
 
 const connectUrl = `mqtt://${host}:${ada_port}`;
@@ -46,10 +47,10 @@ client.on("message", (topic, payload) => {
   console.log("Received Message:", topic, payload.toString());
   let time = new Date();
   if (topic == feed + "iot-temp") {
-    result = TempModel.update("UID001", time, payload);
-    if (result == 0) {
-      TempModel.create("UID001", time, payload);
-    }
+    TempModel.addOne("UID001", time, payload);
+  }
+  if (topic == feed + "iot-humi") {
+    HumiModel.addOne("UID001", time, payload);
   }
 
   if (topic == feed + "iot-gas") {
@@ -62,6 +63,7 @@ client.on("message", (topic, payload) => {
       date: date,
     });
     newNotification.save();
+    
   }
   if (topic == feed + "iot-door") {
     const type = "Door Alert";
@@ -74,6 +76,7 @@ client.on("message", (topic, payload) => {
     });
     newNotification.save();
   }
+  
 });
 
 // Create REST API
