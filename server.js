@@ -5,6 +5,7 @@ const ada_port = "1883";
 const clientId = "mqtt_06092001_backend";
 const TempModel = require("./Models/TemperatureModel.js");
 const HumiModel = require("./Models/HumidityModel.js");
+const gasLogModel = require("./Models/GasLogModel.js")
 const Notification = require("./Models/NotificationModel.js");
 
 const connectUrl = `mqtt://${host}:${ada_port}`;
@@ -54,16 +55,18 @@ client.on("message", (topic, payload) => {
   }
 
   if (topic == feed + "iot-gas") {
-    const type = "Gas Warning";
-    const content = "There may be gas leak in your house !";
-    const date = new Date();
-    const newNotification = new Notification({
-      type: type,
-      content: content,
-      date: date,
-    });
-    newNotification.save();
-    
+    if (payload == 1) {
+      const type = "Gas Warning";
+      const content = "There may be gas leak in your house !";
+      const date = new Date();
+      const newNotification = new Notification({
+        type: type,
+        content: content,
+        date: date,
+      });
+      newNotification.save();
+    }
+    GasLogModel.addOne("UID001", time, payload)
   }
   if (topic == feed + "iot-door") {
     const type = "Door Alert";
@@ -107,6 +110,7 @@ const accountRoute = require("./Routes/AccountRoutes.js");
 const userInfoRoute = require("./Routes/UserInfoRoutes.js");
 const tempHumidRoute = require("./Routes/TempHumidRoutes.js");
 const notificationRoute = require("./Routes/NotificationRoutes.js");
+const GasLogModel = require("./Models/GasLogModel.js");
 
 app.use(bodyParser.json());
 

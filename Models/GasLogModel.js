@@ -1,28 +1,28 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-let Temperature = new Schema({
+let GasLog = new Schema({
   userId : String,
-  createAt : { type: Date, default: Date.now },
+  createAt : { type: Date},
   data : [
       {
-          val: Number,
+          value: Number,
           time: Date
       }
   ]
 });
 
-tempModel = mongoose.model("Temperature", Temperature, "Temperature");
+gasLogModel = mongoose.model("GasLog", GasLog, "GasLog");
 
 module.exports = {
-    create : function(uid, time, value){
-        let day = new Date(time.getFullYear(), time.getMonth(), time.getDate());
-        tempModel.create({
+    create : function(uid, time){
+        let month = new Date(time.getFullYear(), time.getMonth());
+        gasLogModel.create({
             userId : uid,
-            createAt : day,
+            createAt : month,
             data : [
                 {
-                    val: value,
+                    value: value,
                     time: time
                 }
             ]
@@ -36,26 +36,26 @@ module.exports = {
     },
 
     addOne: function(uid, time, value){
-        let day = new Date(time.getFullYear(), time.getMonth(), time.getDate());
-        let myQuery = { userId : uid, createAt : day }
+        let month = new Date(time.getFullYear(), time.getMonth());
+        let myQuery = { userId : uid, createAt : month }
         let newUpdate = {
             $push: {data : {
-                            val: value,
+                            value: value,
                             time: time
                         }}
         }
-        tempModel.updateOne(myQuery, newUpdate, function (err, docs){
+        gasLogModel.updateOne(myQuery, newUpdate, function (err, docs){
             if (err) {
                 console.log(err);
             }
             else {
                 if (docs.matchedCount == 0) {
-                    tempModel.create({
+                    gasLogModel.create({
                         userId : uid,
-                        createAt : day,
+                        createAt : month,
                         data : [
                             {
-                                val: value,
+                                value: value,
                                 time: time
                             }
                         ]
