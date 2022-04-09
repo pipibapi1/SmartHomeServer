@@ -5,7 +5,7 @@ const ada_port = "1883";
 const clientId = "mqtt_06092001_backend";
 const TempModel = require("./Models/TemperatureModel.js");
 const HumiModel = require("./Models/HumidityModel.js");
-const gasLogModel = require("./Models/GasLogModel.js")
+const gasLogModel = require("./Models/GasLogModel.js");
 const Notification = require("./Models/NotificationModel.js");
 
 const connectUrl = `mqtt://${host}:${ada_port}`;
@@ -66,20 +66,21 @@ client.on("message", (topic, payload) => {
       });
       newNotification.save();
     }
-    GasLogModel.addOne("UID001", time, payload)
+    GasLogModel.addOne("UID001", time, payload);
   }
   if (topic == feed + "iot-door") {
-    const type = "Door Alert";
-    const content = "Someone's just opened door 1 !!!";
-    const date = new Date();
-    const newNotification = new Notification({
-      type: type,
-      content: content,
-      date: date,
-    });
-    newNotification.save();
+    if (payload == 1) {
+      const type = "Door Alert";
+      const content = "Someone's just opened door 1 !!!";
+      const date = new Date();
+      const newNotification = new Notification({
+        type: type,
+        content: content,
+        date: date,
+      });
+      newNotification.save();
+    }
   }
-  
 });
 
 // Create REST API
