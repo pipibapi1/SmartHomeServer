@@ -13,15 +13,4 @@ router.get("/get-all", async (req, res) => {
   });
 });
 
-router.post("/control-light", async (req, res) => {
-  const { type, content, date } = req.body;
-  const newNotification = new Notification({
-    type: type,
-    content: content,
-    date: date,
-  });
-  newNotification.save();
-  res.send(req.body);
-});
-
 module.exports = router;

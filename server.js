@@ -81,6 +81,30 @@ client.on("message", (topic, payload) => {
       newNotification.save();
     }
   }
+  if (topic == feed + "iot-light") {
+    if (payload == 1) {
+      const type = "Control Light";
+      const content = "Living room lights have just been TURNED ON !";
+      const date = new Date();
+      const newNotification = new Notification({
+        type: type,
+        content: content,
+        date: date,
+      });
+      newNotification.save();
+    }
+    if (payload == 0) {
+      const type = "Control Light";
+      const content = "Living room lights have just been TURNED OFF !";
+      const date = new Date();
+      const newNotification = new Notification({
+        type: type,
+        content: content,
+        date: date,
+      });
+      newNotification.save();
+    }
+  }
 });
 
 // Create REST API
