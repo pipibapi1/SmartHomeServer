@@ -81,10 +81,10 @@ client.on("message", (topic, payload) => {
       newNotification.save();
     }
   }
-  if (topic == feed + "iot-light") {
+  if (topic == feed + "iot-switchlight") {
     if (payload == 1) {
       const type = "Control Light";
-      const content = "Living room lights have just been TURNED ON !";
+      const content = "You've just TURNED ON living room lights !";
       const date = new Date();
       const newNotification = new Notification({
         type: type,
@@ -95,7 +95,7 @@ client.on("message", (topic, payload) => {
     }
     if (payload == 0) {
       const type = "Control Light";
-      const content = "Living room lights have just been TURNED OFF !";
+      const content = "You've just TURNED OFF living room lights !";
       const date = new Date();
       const newNotification = new Notification({
         type: type,
