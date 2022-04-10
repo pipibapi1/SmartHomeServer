@@ -108,7 +108,7 @@ client.on("message", (topic, payload) => {
   if (topic == feed + "iot-lightsys") {
     if (payload == 1) {
       const type = "Control Light Auto";
-      const content = "The light auto mode in living room is ON!";
+      const content = "The Light Auto Mode in living room is ON!";
       const date = new Date();
       const newNotification = new Notification({
         type: type,
@@ -119,7 +119,7 @@ client.on("message", (topic, payload) => {
     }
     if (payload == 0) {
       const type = "Control Light Auto";
-      const content = "The light auto mode in living room is OFF!";
+      const content = "The Light Auto Mode in living room is OFF!";
       const date = new Date();
       const newNotification = new Notification({
         type: type,
@@ -132,7 +132,7 @@ client.on("message", (topic, payload) => {
   if (topic == feed + "iot-secu") {
     if (payload == 1) {
       const type = "Control Door Safe Mode";
-      const content = "The safe mode of door 1 is ON!";
+      const content = "The Safe Mode of door 1 is ON!";
       const date = new Date();
       const newNotification = new Notification({
         type: type,
@@ -143,7 +143,7 @@ client.on("message", (topic, payload) => {
     }
     if (payload == 0) {
       const type = "Control Door Safe Mode";
-      const content = "The safe mode of door 1 is OFF!";
+      const content = "The Safe Mode of door 1 is OFF!";
       const date = new Date();
       const newNotification = new Notification({
         type: type,
