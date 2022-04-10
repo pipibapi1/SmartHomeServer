@@ -21,6 +21,7 @@ router.post("/control-light", async (req, res) => {
     date: date,
   });
   newNotification.save();
+  res.send(req.body);
 });
 
 module.exports = router;
