@@ -60,8 +60,7 @@ client.on("message", (topic, payload) => {
       // notification
       const type = "Gas Warning";
       const content = "There may be gas leak in your house !";
-      const tim = new Date();
-      const date = tim.getTime();
+      const date = new Date();
       const newNotification = new Notification({
         type: type,
         content: content,
@@ -75,8 +74,7 @@ client.on("message", (topic, payload) => {
     if (payload == 1) {
       const type = "Door Alert";
       const content = "Someone's just opened door 1 !!!";
-      const tim = new Date();
-      const date = tim.getTime();
+      const date = new Date();
       const newNotification = new Notification({
         type: type,
         content: content,
