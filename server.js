@@ -181,7 +181,8 @@ mongoose
   );
 const accountRoute = require("./Routes/AccountRoutes.js");
 const userInfoRoute = require("./Routes/UserInfoRoutes.js");
-const tempHumidRoute = require("./Routes/TempHumidRoutes.js");
+const tempRoute = require("./Routes/tempRoutes.js");
+const HumidityRoute = require("./Routes/HumidityRoutes.js");
 const notificationRoute = require("./Routes/NotificationRoutes.js");
 const gasRoute = require("./Routes/GasRoute.js");
 const doorRoute = require("./Routes/doorRoute.js");
@@ -218,9 +219,10 @@ app.use(function (req, res, next) {
 });
 app.use("/account", accountRoute);
 app.use("/userinfo", userInfoRoute);
-app.use("/temphumid", tempHumidRoute);
+app.use("/temp", tempRoute);
 app.use("/gas", gasRoute);
 app.use("/door", doorRoute);
+app.use("/humidity", HumidityRoute);
 app.use("/notification", notificationRoute);
 
 app.listen(port, () =>
