@@ -15,6 +15,7 @@ let GasLog = new Schema({
 gasLogModel = mongoose.model("GasLog", GasLog, "GasLog");
 
 module.exports = {
+    gasLogModel,
     create : function(uid, time){
         let month = new Date(time.getFullYear(), time.getMonth());
         gasLogModel.create({
