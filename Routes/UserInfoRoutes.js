@@ -25,9 +25,10 @@ router.post("/update", (req, res) => {
       birthday: req.body.birthday,
     },
   };
+  console.log(update);
   const opts = { new: true };
 
-  UserInfo.updateOne(filter, update, function (err, res) {
+  UserInfo.findOneAndUpdate(filter, update, function (err, res) {
     if (err) throw err;
     console.log("1 document updated");
   });
