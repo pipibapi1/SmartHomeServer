@@ -13,24 +13,26 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/update", (req, res) => {
+router.post("/update", async (req, res) => {
   // console.log(req.body);
   const filter = { email: req.body.email };
   const update = {
-    $set: {
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      phone: req.body.phone,
-      gender: req.body.gender,
-      birthday: req.body.birthday,
-    },
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    phone: req.body.phone,
+    gender: req.body.gender,
+    birthday: req.body.birthday,
   };
   const opts = { new: true };
-
-  UserInfo.updateOne(filter, update, function (err, res) {
-    if (err) throw err;
-    console.log("1 document updated");
-  });
+  const newInfo = UserInfo.findOneAndUpdate(
+    filter,
+    update,
+    function (err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
+    }
+  );
+  console.log(newInfo);
 });
 
 function insertRecord(req, res) {
