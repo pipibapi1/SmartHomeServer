@@ -13,4 +13,20 @@ router.get("/", (req, res) => {
   });
 });
 
+router.post("/login", (req, res) => {
+  // console.log(req.body);
+  const find = { email: req.body.email, password: req.body.password };
+  console.log(find);
+
+  Account.findOne(find, function (err, result) {
+    if (err) throw err;
+    else {
+      if (result != null) {
+        console.log(result.email);
+        res.send(result.email);
+      }
+    }
+  });
+});
+
 module.exports = router;
