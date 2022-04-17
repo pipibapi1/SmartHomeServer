@@ -185,10 +185,10 @@ mongoose
   );
 const accountRoute = require("./Routes/AccountRoutes.js");
 const userInfoRoute = require("./Routes/UserInfoRoutes.js");
-const tempRoute = require("./Routes/tempRoutes.js");
+const tempRoute = require("./Routes/TempRoutes.js");
 const HumidityRoute = require("./Routes/HumidityRoutes.js");
 const notificationRoute = require("./Routes/NotificationRoutes.js");
-const gasRoute = require("./Routes/GasRoute.js");
+const gasRoute = require("./Routes/gasRoute.js");
 const doorRoute = require("./Routes/doorRoute.js");
 const GasLogModel = require("./Models/GasLogModel.js");
 
