@@ -6,6 +6,7 @@ const clientId = "mqtt_06092001_backend";
 const TempModel = require("./Models/TemperatureModel.js");
 const HumiModel = require("./Models/HumidityModel.js");
 const gasLogModel = require("./Models/GasLogModel.js");
+const doorLogModel = require("./Models/DoorLogModel.js");
 const Notification = require("./Models/NotificationModel.js");
 
 const connectUrl = `mqtt://${host}:${ada_port}`;
@@ -56,6 +57,7 @@ client.on("message", (topic, payload) => {
 
   if (topic == feed + "iot-gas") {
     if (payload == 1) {
+      // notification
       const type = "Gas Warning";
       const content = "There may be gas leak in your house !";
       const date = new Date();
@@ -66,7 +68,7 @@ client.on("message", (topic, payload) => {
       });
       newNotification.save();
     }
-    GasLogModel.addOne("UID001", time, payload);
+    gasLogModel.addOne("UID001", time, payload);
   }
   if (topic == feed + "iot-door") {
     if (payload == 1) {
@@ -79,6 +81,7 @@ client.on("message", (topic, payload) => {
         date: date,
       });
       newNotification.save();
+      doorLogModel.addOne("UID001", "D001", time, 2);
     }
   }
   if (topic == feed + "iot-switchlight") {
@@ -152,6 +155,7 @@ client.on("message", (topic, payload) => {
       });
       newNotification.save();
     }
+    doorLogModel.addOne("UID001", "D001", time, payload);
   }
 });
 

@@ -18,9 +18,10 @@ module.exports = {
     gasLogModel,
     create : function(uid, time){
         let month = new Date(time.getFullYear(), time.getMonth());
+        monthVal = month.getTime();
         gasLogModel.create({
             userId : uid,
-            createAt : month,
+            createAt : monthVal,
             data : [
                 {
                     value: value,
@@ -38,7 +39,8 @@ module.exports = {
 
     addOne: function(uid, time, value){
         let month = new Date(time.getFullYear(), time.getMonth());
-        let myQuery = { userId : uid, createAt : month }
+        monthVal = month.getTime();
+        let myQuery = { userId : uid, createAt : monthVal }
         let newUpdate = {
             $push: {data : {
                             value: value,
@@ -53,7 +55,7 @@ module.exports = {
                 if (docs.matchedCount == 0) {
                     gasLogModel.create({
                         userId : uid,
-                        createAt : month,
+                        createAt : monthVal,
                         data : [
                             {
                                 value: value,
