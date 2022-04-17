@@ -189,7 +189,7 @@ const tempRoute = require("./Routes/TempRoutes.js");
 const HumidityRoute = require("./Routes/HumidityRoutes.js");
 const notificationRoute = require("./Routes/NotificationRoutes.js");
 const gasRoute = require("./Routes/gasRoute.js");
-const doorRoute = require("./Routes/DoorRoute.js");
+const doorRoute = require("./Routes/doorRoute.js");
 const GasLogModel = require("./Models/GasLogModel.js");
 
 app.use(bodyParser.json());
