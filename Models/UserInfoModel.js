@@ -7,7 +7,10 @@ let UserInfo = new Schema({
     type: String,
     key: true,
   },
-  name: {
+  firstname: {
+    type: String,
+  },
+  lastname: {
     type: String,
   },
   phone: {

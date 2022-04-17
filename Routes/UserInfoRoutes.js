@@ -23,16 +23,13 @@ router.post("/update", async (req, res) => {
     gender: req.body.gender,
     birthday: req.body.birthday,
   };
+  console.log(update);
   const opts = { new: true };
-  const newInfo = UserInfo.findOneAndUpdate(
-    filter,
-    update,
-    function (err, res) {
-      if (err) throw err;
-      console.log("1 document updated");
-    }
-  );
-  console.log(newInfo);
+
+  UserInfo.findOneAndUpdate(filter, update, function (err, res) {
+    if (err) throw err;
+    console.log("1 document updated");
+  });
 });
 
 function insertRecord(req, res) {
