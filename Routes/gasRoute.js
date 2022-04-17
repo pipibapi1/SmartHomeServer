@@ -4,7 +4,7 @@ const GasLogModel = require("../Models/GasLogModel.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    GasLogModel.gasLogModel.find(function (err, gas) {
+  GasLogModel.gasLogModel.find(function (err, gas) {
     if (err) {
       console.log(err);
     } else {
