@@ -183,20 +183,7 @@ mongoose
       console.log("Can not connect to the database " + err);
     }
   );
-const accountRoute = require("./Routes/AccountRoutes.js");
-const userInfoRoute = require("./Routes/UserInfoRoutes.js");
-const tempRoute = require("./Routes/TempRoutes.js");
-const HumidityRoute = require("./Routes/HumidityRoutes.js");
-const notificationRoute = require("./Routes/NotificationRoutes.js");
-const gasRoute = require("./Routes/gasRoute.js");
-const doorRoute = require("./Routes/doorRoute.js");
-const GasLogModel = require("./Models/GasLogModel.js");
 
-app.use(bodyParser.json());
-
-app.get("/", (req, res) => {
-  res.send("THIS IS THE CAFE COT DUA SMART HOME SERVER");
-});
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
@@ -221,6 +208,22 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+
+const accountRoute = require("./Routes/AccountRoutes.js");
+const userInfoRoute = require("./Routes/UserInfoRoutes.js");
+const tempRoute = require("./Routes/TempRoutes.js");
+const HumidityRoute = require("./Routes/HumidityRoutes.js");
+const notificationRoute = require("./Routes/NotificationRoutes.js");
+const gasRoute = require("./Routes/gasRoute.js");
+const doorRoute = require("./Routes/doorRoute.js");
+const GasLogModel = require("./Models/GasLogModel.js");
+
+app.use(bodyParser.json());
+
+app.get("/", (req, res) => {
+  res.send("THIS IS THE CAFE COT DUA SMART HOME SERVER");
+});
+
 app.use("/account", accountRoute);
 app.use("/userinfo", userInfoRoute);
 app.use("/temp", tempRoute);
