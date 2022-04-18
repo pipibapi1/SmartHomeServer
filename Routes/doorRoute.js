@@ -4,7 +4,7 @@ const DoorLogModel = require("../Models/DoorLogModel.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  DoorLogModel.find(function (err, gas) {
+  DoorLogModel.doorLogModel.find(function (err, gas) {
     if (err) {
       console.log(err);
     } else {
