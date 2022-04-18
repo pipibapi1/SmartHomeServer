@@ -24,14 +24,19 @@ router.post("/login", (req, res) => {
       if (result != null) {
         console.log(result.email);
         res.send(result.email);
-      }
+      } else res.send("Unsuccessful");
     }
   });
 });
 
 router.post("/register", (req, res) => {
   // console.log(req.body);
-  const find = { userId: req.body.email, email: req.body.email, password: req.body.password, name: req.body.name};
+  const find = {
+    userId: req.body.email,
+    email: req.body.email,
+    password: req.body.password,
+    name: req.body.name,
+  };
   console.log(find);
 
   Account.create(find, function (err, result) {
@@ -45,12 +50,11 @@ router.post("/register", (req, res) => {
   });
 });
 
-
 router.post("/forgotpassword", (req, res) => {
   // console.log(req.body);
   const filter = { email: req.body.email };
   const update = {
-      password: req.body.password,
+    password: req.body.password,
   };
 
   Account.findOneAndUpdate(filter, update, function (err, result) {
@@ -64,19 +68,19 @@ router.post("/forgotpassword", (req, res) => {
   });
 });
 
-module.exports = router;
-  // UserInfo.findOneAndUpdate(filter, update, function (err, res) {
-  //   if (err) throw err;
-  //   console.log("1 document updated");
-  // });
+router.post("/users", (req, res) => {
+  // console.log(req.body);
+  const find = { email: req.body.email };
+  console.log(find);
+  Account.findOne(find, function (err, result) {
+    if (err) throw err;
+    else {
+      if (result != null) {
+        console.log(result.email);
+        res.send("exists");
+      } else res.send("Not exists");
+    }
+  });
+});
 
-  // const filter = { email: req.body.email };
-  // const update = {
-  //   $set: {
-  //     firstname: req.body.firstname,
-  //     lastname: req.body.lastname,
-  //     phone: req.body.phone,
-  //     gender: req.body.gender,
-  //     birthday: req.body.birthday,
-  //   },
-  // };
+module.exports = router;
