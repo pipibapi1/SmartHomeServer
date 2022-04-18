@@ -4,7 +4,7 @@ const Humidity = require("../Models/HumidityModel.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    Humidity.find(function (err, humi) {
+  Humidity.humiModel.find(function (err, humi) {
     if (err) {
       console.log(err);
     } else {
