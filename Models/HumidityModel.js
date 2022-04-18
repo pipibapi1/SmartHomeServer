@@ -15,6 +15,7 @@ let Humidity = new Schema({
 humiModel = mongoose.model("Humidity", Humidity, "Humidity");
 
 module.exports = {
+  humiModel,
   create: function (uid, time, value) {
     let day = new Date(time.getFullYear(), time.getMonth(), time.getDate());
     humiModel.create(
