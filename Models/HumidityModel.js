@@ -12,7 +12,7 @@ let Humidity = new Schema({
   ],
 });
 
-module.exports = mongoose.model("Humidity", Humidity, "Humidity");
+humiModel = mongoose.model("Humidity", Humidity, "Humidity");
 
 module.exports = {
   create: function (uid, time, value) {
