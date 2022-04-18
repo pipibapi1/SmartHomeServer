@@ -16,6 +16,7 @@ let DoorLog = new Schema({
 doorLogModel = mongoose.model("DoorLog", DoorLog, "DoorLog");
 
 module.exports = {
+  doorLogModel,
   create: function (uid, doorid, time, value) {
     let month = new Date(time.getFullYear(), time.getMonth());
     doorLogModel.create(
