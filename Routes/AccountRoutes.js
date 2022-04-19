@@ -40,7 +40,6 @@ router.post("/register", (req, res) => {
   };
   const create = { email: req.body.email };
   console.log(find);
-  let check = false;
 
   Account.create(find, function (err, result) {
     if (err) throw err;
@@ -48,6 +47,7 @@ router.post("/register", (req, res) => {
       if (result != null) {
         // console.log(result.email);
         UserInfo.create(create, function (err, result) {
+          // console.log(result.email);
           if (err) return;
           else {
             if (result != null) {
