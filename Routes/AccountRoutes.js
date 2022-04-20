@@ -1,5 +1,6 @@
 const express = require("express");
 const Account = require("../Models/AccountModel.js");
+const UserInfo = require("../Models/UserInfoModel.js");
 
 const router = express.Router();
 
@@ -37,6 +38,7 @@ router.post("/register", (req, res) => {
     password: req.body.password,
     name: req.body.name,
   };
+  const create = { email: req.body.email };
   console.log(find);
 
   Account.create(find, function (err, result) {
@@ -44,7 +46,15 @@ router.post("/register", (req, res) => {
     else {
       if (result != null) {
         // console.log(result.email);
-        res.send("Successfull");
+        UserInfo.create(create, function (err, result) {
+          // console.log(result.email);
+          if (err) return;
+          else {
+            if (result != null) {
+              res.send("Successfull");
+            }
+          }
+        });
       }
     }
   });
